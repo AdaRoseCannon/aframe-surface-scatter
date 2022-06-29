@@ -1,0 +1,26 @@
+<html>
+
+	<head>
+		<script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
+		<script	src="https://cdn.jsdelivr.net/npm/aframe-environment-component@1.3.1/dist/aframe-environment-component.min.js"></script>
+		<script src="./build/aframe-surface-scatter.js"></script>
+		<script src="./demo_assets/wavy-shader.js"></script>
+	</head>
+
+	<body>
+		<a-scene
+			reflection="directionalLight:#dirlight;"
+			renderer="alpha:true;physicallyCorrectLights:true;colorManagement:true;exposure:1;toneMapping:ACESFilmic;"
+		>
+			<a-assets>
+				<a-asset-item id="grass" src="./demo_assets/grass_big.glb"></a-asset-item>
+			</a-assets>
+			<a-gltf-model id="decoration" wavy-shader src="#grass"></a-gltf-model>
+			<a-entity hide-on-enter-ar position="0 -0.2 0" environment="preset:yavapai;skyType:atmosphere;"></a-entity>
+			<!-- <a-cylinder radius="0.02" height="0.04" color="red"></a-cylinder> -->
+			<!-- <a-sphere radius="0.5" position="0 1 -2" material="shader:flat;color:#30266b;" surface-scatter="object:#decoration;count:800;"></a-sphere> -->
+			<a-circle radius="9" rotation="-90 0 0" material="shader:flat;color:#30266b;" surface-scatter="object:#decoration;count:1200;scale:3 3 3;scaleJitter:1 1 1;uniformJitter:true;"></a-circle>
+		</a-scene>
+	</body>
+
+</html>
