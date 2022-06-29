@@ -1,6 +1,8 @@
 # AFrame-surface-scatter
 
-[Demo] (https://ada.is/aframe-surface-scatter)
+[Demo](https://ada.is/aframe-surface-scatter)
+
+![Screenshot of a 3D rendered field of grass with flowers](https://user-images.githubusercontent.com/4225330/176483332-1135d75d-d1fe-4e30-87ce-5852e2ce5c34.png)
 
 
 ## Simple Example
