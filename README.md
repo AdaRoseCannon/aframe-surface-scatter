@@ -1,5 +1,13 @@
 # AFrame-surface-scatter
 
+[Demo] (https://ada.is/aframe-surface-scatter)
+
+
+## Simple Example
+```html
+<a-cylinder radius="0.02" height="0.04" color="red"></a-cylinder>
+<a-sphere radius="0.5" position="0 1 -2" surface-scatter="object:#decoration;count:800;"><a-sphere>
+```
 
 <!--DOCS-->
 ### surface-scatter component
