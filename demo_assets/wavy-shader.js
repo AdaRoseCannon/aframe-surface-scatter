@@ -24,8 +24,8 @@ AFRAME.registerComponent('wavy-shader', {
 			#endif
 			originalPosition = modelMatrix * originalPosition;
 
-			mvPosition.x += 0.2 * mvPosition.z * sin(time * 0.001 + 1.1 * originalPosition.x);
-			mvPosition.y += 0.2 * mvPosition.z * cos(time * 0.001 + 1.1 * originalPosition.x);
+			mvPosition.x += 0.2 * mvPosition.y * sin(time * 0.001 + 1.1 * originalPosition.x);
+			mvPosition.z += 0.2 * mvPosition.y * cos(time * 0.001 + 1.1 * originalPosition.x);
 
 			#ifdef USE_INSTANCING
 				mvPosition = instanceMatrix * mvPosition;

@@ -38,7 +38,7 @@ documentation:
 }());
 
 const _position = new THREE.Vector3();
-const up = new THREE.Vector3(0,0,-1);
+const up = new THREE.Vector3(0,1,0);
 const _quaternion = new THREE.Quaternion();
 const _normal = new THREE.Vector3();
 const _scale = new THREE.Vector3(1,1,1);
