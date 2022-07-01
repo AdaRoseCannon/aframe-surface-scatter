@@ -24,15 +24,17 @@
 			<a-assets>
 				<a-asset-item id="grass" src="./demo_assets/grass_big.glb"></a-asset-item>
 			</a-assets>
-			<a-gltf-model id="decoration" wavy-shader src="#grass"></a-gltf-model>
 			<a-entity hide-on-enter-ar position="0 -0.2 0" environment="preset:yavapai;skyType:atmosphere;"></a-entity>
 			<!-- <a-cylinder radius="0.02" height="0.04" color="red"></a-cylinder> -->
 			<!-- <a-sphere radius="0.5" position="0 1 -2" material="shader:flat;color:#30266b;" surface-scatter="object:#decoration;count:800;"></a-sphere> -->
-			<a-circle radius="9" rotation="-90 0 0" material="shader:flat;color:#30266b;" surface-scatter="object:#decoration;count:1200;scale:3 3 3;scaleJitter:1 1 1;uniformJitter:true;"></a-circle>
+			<a-sphere radius="0.4" data-radius="0.4" position="0 0.5 -1" opacity="1" animation="dur: 3000; property: object3D.position.x; from: -1; to: 1; loop: true; dir: alternate; easing: easeInOutQuad;" class="pushgrass"></a-sphere>
+			<a-circle radius="7" rotation="-90 0 0" material="shader:flat;color:#30266b;" surface-scatter="object:#decoration;count:1200;scale:3 3 3;scaleJitter:1 1 1;uniformJitter:true;"></a-circle>
+			<a-gltf-model id="decoration" wavy-shader=".pushgrass" src="#grass" visible="false"></a-gltf-model>
 		</a-scene>
-		<a href="https://github.com/AdaRoseCannon/aframe-surface-scatter/">
-			<img src="demo_assets/240px-GitHub_forkme_ribbon_right_green.svg.png" style="position: absolute; inset: 0 0 auto auto;" alt="Ribbon Saying Fork me on github">
-		</a>
+		<img src="http://localhost:8080/demo_assets/240px-GitHub_forkme_ribbon_right_green.svg.png" style="position: absolute; inset: 0 0 auto auto; user-select: none;" alt="Ribbon Saying Fork me on github" usemap="#image-map">
+		<map name="image-map">
+			<area target="" alt="Fork me on Github" title="Fork me on Github" href="https://github.com/AdaRoseCannon/aframe-surface-scatter/" coords="21,4,234,207,237,151,86,-1" shape="poly">
+		</map>
 	</body>
 
 </html>
