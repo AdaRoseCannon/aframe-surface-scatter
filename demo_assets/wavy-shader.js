@@ -41,7 +41,7 @@ AFRAME.registerComponent('wavy-shader', {
 			v = mvPosition.xyz - ${name}.xyz;
 			d = length(v);
 			r = ${name}.w;
-			mvPosition.xyz += (1.-smoothstep(r*0.9,r*1.3,d))* bendAmount * (v/d) * r;
+			mvPosition.xyz += smoothstep(0.,r*0.9,d) * (1.-smoothstep(r*0.9,r*1.2,d))* bendAmount * (v/d) * r;
 			`;
 		}
 		console.log(grassTouchFn);
