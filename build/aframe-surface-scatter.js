@@ -253,6 +253,7 @@
 					geometries.push(object.geometry);
 				}
 			});
+			if (!geometries.length) return;
 
 			this.sampler = new MeshSurfaceSampler({
 				geometry: THREE.BufferGeometryUtils.mergeBufferGeometries(geometries)
@@ -319,7 +320,7 @@
 		},
 		remove() {
 			this.el.removeObject3D('instances');
-			this.el.removeEventListener('object3dset', resample);
+			this.el.removeEventListener('object3dset', this.resample);
 			this.data.object.removeEventListener('object3dset', this.update);
 		}
 	});
