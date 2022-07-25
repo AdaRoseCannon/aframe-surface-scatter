@@ -1,6 +1,6 @@
 {
   "name": "aframe-surface-scatter",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "THREE surface-scatter in AFrame",
   "repository": "https://github.com/AdaRoseCannon/aframe-surface-scatter",
   "scripts": {
@@ -8,7 +8,7 @@
     "build": "rollup -c && find build -maxdepth 2 -iname \"*.js\" -not -type d -exec du -h {} \\;;npm run docs",
     "develop": "rollup -w -c"
   },
-  "type":"module",
+  "type": "module",
   "author": "AdaRoseCannon",
   "license": "MIT",
   "devDependencies": {
