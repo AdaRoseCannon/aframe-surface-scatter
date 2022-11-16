@@ -18,7 +18,15 @@ const schema = {
 		type: 'vec3',
 		default: new THREE.Vector3(1,1,1)
 	},
+	rotation: {
+		type: 'vec3',
+		default: new THREE.Vector3(0,0,0)
+	},
 	scaleJitter: {
+		type: 'vec3',
+		default: new THREE.Vector3()
+	},
+	rotationJitter: {
 		type: 'vec3',
 		default: new THREE.Vector3()
 	},
@@ -33,13 +41,18 @@ documentation:
 	schema.count.description = `Amount of objects`
 	schema.weightAttribute.description = `Specifies a vertex attribute to be used as a weight when sampling from the surface. Faces with higher weights are more likely to be sampled, and those with weights of zero will not be sampled at all. For vector attributes, only .x is used in sampling. If no weight attribute is selected, sampling is randomly distributed by area.`;
 	schema.scale.description = `Amount to scale the objects by`;
+	schema.rotation.description = `Amount to rotate the objects by`;
 	schema.scaleJitter.description = `Add randomness to the scaling`;
+	schema.rotationJitter.description = `Add randomness to the rotation`;
 	schema.uniformJitter.description = `Scale x,y,z together (true) or each independently (false)`;
 }());
 
 const _position = new THREE.Vector3();
 const up = new THREE.Vector3(0,1,0);
 const _quaternion = new THREE.Quaternion();
+const _quaternion2 = new THREE.Quaternion();
+const _Euler = new THREE.Euler();
+const _tempVector3 = new THREE.Vector3();
 const _normal = new THREE.Vector3();
 const _scale = new THREE.Vector3(1,1,1);
 const _matrix = new THREE.Matrix4();
@@ -81,6 +94,10 @@ AFRAME.registerComponent('surface-scatter', {
 
 			this.sampler.sample( _position, _normal );
 			_quaternion.setFromUnitVectors(up, _normal);
+			_tempVector3.fromArray(this.rotations[i]);
+			_Euler.setFromVector3(_tempVector3);
+			_quaternion2.setFromEuler(_Euler);
+			_quaternion.multiply(_quaternion2);
 			_scale.fromArray(this.scales[i]);
 			_matrix.compose(_position, _quaternion, _scale);
 			for (const ins of this.instance) {
@@ -103,15 +120,25 @@ AFRAME.registerComponent('surface-scatter', {
 				this.data.scale.x + (this.data.uniformJitter ? uniformRandom : Math.random()) * this.data.scaleJitter.x,
 				this.data.scale.y + (this.data.uniformJitter ? uniformRandom : Math.random()) * this.data.scaleJitter.y,
 				this.data.scale.z + (this.data.uniformJitter ? uniformRandom : Math.random()) * this.data.scaleJitter.z,
-			]
+			];
+		}
+
+		this.rotations = [];
+		for (let i=0;i<this.data.count;i++) {
+			const uniformRandom = Math.random();
+			this.rotations[i] = [
+				this.data.rotation.x + (this.data.uniformJitter ? uniformRandom : Math.random()) * this.data.rotationJitter.x * THREE.MathUtils.DEG2RAD,
+				this.data.rotation.y + (this.data.uniformJitter ? uniformRandom : Math.random()) * this.data.rotationJitter.y * THREE.MathUtils.DEG2RAD,
+				this.data.rotation.z + (this.data.uniformJitter ? uniformRandom : Math.random()) * this.data.rotationJitter.z * THREE.MathUtils.DEG2RAD,
+			];
 		}
 
 		if (oldDetails.object) oldDetails.object.removeEventListener('object3dset', this.update);
 		data.object.addEventListener('object3dset', this.update);
 
 		const group = new THREE.Group();
-		if (this.el.getObject3D('instances')) {
-			this.el.removeObject3D('instances');
+		if (this.el.getObject3D('instances_' + (this.id || ''))) {
+			this.el.removeObject3D('instances_' + (this.id || ''));
 		}
 		instances.splice(0);
 		if (data.object) {
@@ -123,11 +150,11 @@ AFRAME.registerComponent('surface-scatter', {
 				}
 			});
 		}
-		this.el.setObject3D('instances', group);
+		this.el.setObject3D('instances_' + (this.id || ''), group);
 		this.resample();
 	},
 	remove() {
-		this.el.removeObject3D('instances');
+		this.el.removeObject3D('instances_' + (this.id || ''));
 		this.el.removeEventListener('object3dset', this.resample);
 		this.data.object.removeEventListener('object3dset', this.update);
 	}
