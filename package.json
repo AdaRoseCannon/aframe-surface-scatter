@@ -1,6 +1,6 @@
 {
   "name": "aframe-surface-scatter",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "description": "THREE surface-scatter in AFrame",
   "repository": "https://github.com/AdaRoseCannon/aframe-surface-scatter",
   "scripts": {
