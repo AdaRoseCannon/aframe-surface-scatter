@@ -13,8 +13,7 @@
 
 You can use multiple `surface-scatter` components by appending `__name` to the component e.g. 
 
-```
-
+```html
 <a-sphere radius="0.5" surface-scatter__flowers="object:#flowers;count:800;" surface-scatter__trees="object:#trees;count:20;"><a-sphere>
 ```
 
