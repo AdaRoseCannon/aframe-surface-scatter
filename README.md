@@ -11,6 +11,13 @@
 <a-sphere radius="0.5" position="0 1 -2" surface-scatter="object:#decoration;count:800;"><a-sphere>
 ```
 
+You can use multiple `surface-scatter` components by appending `__name` to the component e.g. 
+
+```
+
+<a-sphere radius="0.5" surface-scatter__flowers="object:#flowers;count:800;" surface-scatter__trees="object:#trees;count:20;"><a-sphere>
+```
+
 <!--DOCS-->
 ### surface-scatter component
 
